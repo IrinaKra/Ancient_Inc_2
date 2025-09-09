@@ -37,11 +37,6 @@ def read_db(path: Path = DB_PATH) -> List[Dict[str, str]]:
     return rows
 
 
-def write_db(record: dict, path: Path) -> None:
-    with path.open("a", newline = "") as file:
-        csv.DictWriter(file, fielnames = FIELDS).writerow
-
-
 def format_month(m): 
     s = (m or "").strip().lower() 
     names = {x.lower(): i for i, x in enumerate(calendar.month_name) if i} 
