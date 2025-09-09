@@ -1,12 +1,14 @@
 import csv
 import random
 
+from pathlib import Path
 from faker import Faker
 
 DEPARTMENTS = ["Engineering", "Sales", "HR", "Marketing", "Finance"]
 FIELDS = ["name", "department", "birthday", "hiring_date"]
 
 fake = Faker()
+
 
 def generate_row():
     return {
@@ -16,9 +18,17 @@ def generate_row():
         "hiring_date": fake.date_between(start_date = '-10y', end_date = 'today').isoformat()
     }
 
-with open("database.csv", "w") as file:
-    fieldnames = FIELDS
-    writer = csv.DictWriter(file, fieldnames = fieldnames)
-    writer.writeheader()
-    for i in range(100):
-        writer.writerow(generate_row())
+
+def generate_data(num: int = 100) -> Path:
+    path = Path("database.csv")
+    path.parent.mkdir(parents = True, exist_ok = True)
+    with path.open("w", newline = "") as file:
+        writer = csv.DictWriter(file, fieldnames = FIELDS)
+        writer.writeheader()
+        for i in range(num):
+            writer.writerow(generate_row())
+    return path
+
+
+if __name__ == "__main__":
+    generate_data()
