@@ -8,7 +8,7 @@ BASE_URL = "http://localhost:5000"
 def fetch_report(month: str, department: str, kind: str = "birthdays"):
     url = f"{BASE_URL}/{kind}"
     params = {"month": month, "department": department}
-    resp = requests.get(url, params = params)
+    resp = requests.get(url, params=params)
     return resp.json()
 
 

@@ -4,7 +4,7 @@ import calendar
 from datetime import date
 from flask import Flask, request, jsonify
 from pathlib import Path
-from typing import List, Dict, Optional
+from typing import List, Dict
 
 
 app = Flask(__name__)
@@ -18,14 +18,14 @@ def check_db(path: Path = DB_PATH) -> bool:
 
 
 def create_db(path: Path = DB_PATH) -> None:
-    path.parent.mkdir(parents = True, exist_ok = True)
-    with path.open("w", newline = "") as file:
-        csv.DictWriter(file, fieldnames = FIELDS).writeheader()
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with path.open("w", newline="") as file:
+        csv.DictWriter(file, fieldnames=FIELDS).writeheader()
 
 
 def read_db(path: Path = DB_PATH) -> List[Dict[str, str]]:
     rows = []
-    with path.open("r", newline = "") as file:
+    with path.open("r", newline="") as file:
         reader = csv.DictReader(file)
         for i in reader:
             rows.append({
@@ -93,4 +93,4 @@ create_db(DB_PATH)
 
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host='127.0.0.1', port=5000)
