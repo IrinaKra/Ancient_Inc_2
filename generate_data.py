@@ -2,6 +2,7 @@ import csv
 import random
 
 from pathlib import Path
+from typing import Any, Mapping
 from faker import Faker
 
 DEPARTMENTS = ["Engineering", "Sales", "HR", "Marketing", "Finance"]
@@ -10,13 +11,7 @@ FIELDS = ["name", "department", "birthday", "hiring_date"]
 fake = Faker()
 
 
-def generate_row(
-    *,
-    min_age=21,
-    max_age=65,
-    h_start="-10y",
-    h_end="today",
-):
+def generate_row(*, min_age=21, max_age=65, h_start="-10y", h_end="today") -> Mapping[str, Any]:
     return {
         "name": fake.name(),
         "department": random.choice(DEPARTMENTS),
