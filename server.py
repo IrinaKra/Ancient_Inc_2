@@ -1,15 +1,14 @@
-import csv
 import calendar
+import csv
 
+from config import DB_PATH
 from datetime import date
 from flask import Flask, request, jsonify
 from pathlib import Path
 from typing import List, Dict
 
-
 app = Flask(__name__)
 
-DB_PATH = Path("database.csv")
 FIELDS = ["name", "department", "birthday", "hiring_date"]
 
 
